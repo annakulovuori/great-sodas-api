@@ -22,7 +22,13 @@ public class SodaController {
         this.sodaRepository = sodaRepository;
     }
 
-    @GetMapping(value = "/api/sodas/{id}")
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<Iterable<Soda>> fetchAll() {
+        Iterable<Soda> sodas = sodaRepository.findAll();
+        return new ResponseEntity<Iterable<Soda>>(sodas, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Soda> fetchById(@PathVariable int id) {
         Optional<Soda> optionalSoda =  sodaRepository.findById(id);
         if (optionalSoda.isEmpty()) {
