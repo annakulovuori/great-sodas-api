@@ -1,0 +1,21 @@
+GET http://localhost:8080/api/sodas
+
+###
+
+GET http://localhost:8080/api/sodas/2
+
+###
+
+DELETE http://localhost:8080/api/sodas/5
+
+###
+
+POST http://localhost:8080/api/sodas
+Content-Type: application/json
+
+{
+    "name": "Testijuoma",
+    "brand": "Annan panimo"
+}
+
+###
