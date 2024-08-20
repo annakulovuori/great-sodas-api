@@ -40,7 +40,13 @@ public class SodaController {
             throw new IllegalArgumentException("cannot find with id");
         }
         sodaRepository.deleteById(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Customer deleted");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Soda deleted");
+    }
+
+    @PostMapping(value = {"", "/"})
+    public ResponseEntity<String> addSoda(@RequestBody Soda soda) {
+        sodaRepository.save(soda);
+        return ResponseEntity.status(HttpStatus.CREATED).body("New soda created");
     }
 
 }
