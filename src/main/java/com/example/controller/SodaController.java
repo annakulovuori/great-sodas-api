@@ -37,4 +37,13 @@ public class SodaController {
         return new ResponseEntity<Soda>(optionalSoda.get(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "{id}")
+    public ResponseEntity<String> deleteById(@PathVariable int id) {
+        if (sodaRepository.findById(id).isEmpty()) {
+            throw new IllegalArgumentException("cannot find with id");
+        }
+        sodaRepository.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Customer deleted");
+    }
+
 }
