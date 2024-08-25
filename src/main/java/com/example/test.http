@@ -2,7 +2,7 @@ GET http://localhost:8080/api/sodas
 
 ###
 
-GET http://localhost:8080/api/sodas/2
+GET http://localhost:8080/api/sodas/a
 
 ###
 
