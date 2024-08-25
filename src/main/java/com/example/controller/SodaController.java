@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.entity.Soda;
 import com.example.repository.SodaRepository;
+import com.example.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class SodaController {
     public ResponseEntity<Soda> fetchById(@PathVariable int id) {
         Optional<Soda> optionalSoda =  sodaRepository.findById(id);
         if (optionalSoda.isEmpty()) {
-            throw new IllegalArgumentException("cannot find with id");
+            throw new ResourceNotFoundException(id);
         }
         return new ResponseEntity<Soda>(optionalSoda.get(), HttpStatus.OK);
     }
@@ -37,7 +38,7 @@ public class SodaController {
     @DeleteMapping(value = "{id}")
     public ResponseEntity<String> deleteById(@PathVariable int id) {
         if (sodaRepository.findById(id).isEmpty()) {
-            throw new IllegalArgumentException("cannot find with id");
+            throw new ResourceNotFoundException(id);
         }
         sodaRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Soda deleted");
