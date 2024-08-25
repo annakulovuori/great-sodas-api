@@ -13,4 +13,10 @@ public class MyExceptionHandler {
         ErrorInfo e = new ErrorInfo("Could not find with id " + ex.getSodaId());
         return new ResponseEntity<ErrorInfo>(e, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorInfo> handleConflict(Exception ex) {
+        ErrorInfo e = new ErrorInfo("Something went wrong");
+        return new ResponseEntity<ErrorInfo>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
