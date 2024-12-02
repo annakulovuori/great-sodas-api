@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.entity.Soda;
 import com.example.repository.SodaRepository;
 import com.example.exception.ResourceNotFoundException;
+import com.example.service.SodaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import java.util.Optional;
 public class SodaController {
 
     SodaRepository sodaRepository;
+    SodaService sodaService;
+
     @Autowired
     public SodaController(SodaRepository sodaRepository) {
         this.sodaRepository = sodaRepository;
@@ -51,9 +54,9 @@ public class SodaController {
     }
 
     @PatchMapping(value = "{id}")
-    public ResponseEntity<String> updateSoda(@RequestBody Soda soda) {
-        sodaRepository.updateById(soda);
-        return null;
+    public ResponseEntity<Soda> updateSoda(@PathVariable int id, @RequestBody Soda soda) {
+        Soda updatedSoda = sodaService.updateById(id, soda);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedSoda);
     }
 
 }
