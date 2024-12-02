@@ -5,6 +5,8 @@ import com.example.repository.SodaRepository;
 import com.example.exception.ResourceNotFoundException;
 import com.example.service.SodaService;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +16,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/sodas")
+@RequiredArgsConstructor
 public class SodaController {
 
-    SodaRepository sodaRepository;
-    SodaService sodaService;
+    private final SodaRepository sodaRepository;
+    private final SodaService sodaService;
 
-    @Autowired
-    public SodaController(SodaRepository sodaRepository) {
-        this.sodaRepository = sodaRepository;
-    }
 
     @GetMapping(value = {"", "/"})
     public ResponseEntity<Iterable<Soda>> fetchAll() {
