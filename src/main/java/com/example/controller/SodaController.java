@@ -50,4 +50,10 @@ public class SodaController {
         return ResponseEntity.status(HttpStatus.CREATED).body("New soda created");
     }
 
+    @PatchMapping(value = "{id}")
+    public ResponseEntity<String> updateSoda(@RequestBody Soda soda) {
+        sodaRepository.updateById(soda);
+        return null;
+    }
+
 }
