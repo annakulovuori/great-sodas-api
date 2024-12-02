@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SodaRepository extends JpaRepository<Soda, Integer> {
+    void updateById(Soda soda);
 }
