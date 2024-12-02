@@ -29,9 +29,15 @@ dependencies {
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 	implementation("org.mariadb.jdbc:mariadb-java-client")
+
+	implementation ("org.mapstruct:mapstruct:1.5.2.Final")
+	annotationProcessor ("org.mapstruct:mapstruct-processor:1.5.2.Final")
+	annotationProcessor ("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+	testAnnotationProcessor ("org.mapstruct:mapstruct-processor:1.5.2.Final")
 }
 
 tasks.withType<Test> {
