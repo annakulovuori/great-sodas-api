@@ -5,9 +5,7 @@ import com.example.repository.SodaRepository;
 import com.example.exception.ResourceNotFoundException;
 import com.example.service.SodaService;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,20 +27,30 @@ public class SodaController {
         return new ResponseEntity<Iterable<Soda>>(sodas, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/id/{id}")
     public ResponseEntity<Soda> fetchById(@PathVariable int id) {
         Optional<Soda> optionalSoda =  sodaRepository.findById(id);
         if (optionalSoda.isEmpty()) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Cannot find soda with id: " + id);
         }
         return new ResponseEntity<Soda>(optionalSoda.get(), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/name/{name}")
+    public ResponseEntity<Soda> fetchByName(@PathVariable String name) {
+        Optional<Soda> optionalSoda =  sodaRepository.findByNameIgnoreCase(name);
+        if (optionalSoda.isEmpty()) {
+            throw new ResourceNotFoundException("Cannot find soda with name: " + name);
+        }
+        return new ResponseEntity<Soda>(optionalSoda.get(), HttpStatus.OK);
+    }
+
 
     @Transactional
     @DeleteMapping(value = "{id}")
     public ResponseEntity<String> deleteById(@PathVariable int id) {
         if (sodaRepository.findById(id).isEmpty()) {
-            throw new ResourceNotFoundException(id);
+            throw new ResourceNotFoundException("Cannot find soda with id: " + id);
         }
         sodaRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Soda deleted");
