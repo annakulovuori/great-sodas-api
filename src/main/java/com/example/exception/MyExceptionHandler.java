@@ -12,7 +12,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 public class MyExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorInfo> handleConflict(ResourceNotFoundException ex) {
-        ErrorInfo e = new ErrorInfo("Could not find with id " + ex.getSodaId());
+        ErrorInfo e = new ErrorInfo(ex.getMessage());
         return new ResponseEntity<ErrorInfo>(e, HttpStatus.NOT_FOUND);
     }
 
