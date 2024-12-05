@@ -15,7 +15,7 @@ public class SodaService {
     private final SodaMapper mapper;
 
     public Soda updateById(int id, Soda soda) {
-        Soda foundSoda = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        Soda foundSoda = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cannot find soda with id: " + id));
         int foundId = foundSoda.getId();
 
     // käy läpi sodan ja jos siellä on tyhjä niin pitää vanhan. Ylikirjoitetaan vanha eli palautetaan vanha.
