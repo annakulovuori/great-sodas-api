@@ -17,10 +17,6 @@ You can run the app by cloning the repository and test it with test.http or post
 - MariaDB
 
 ### Features
-- Post new products
-- Delete products
-- Get products by id
+- Post, Delete, Put
+- Get products by id and name
 
-### Features to be done
-- Put
-- Find by name
